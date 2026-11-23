@@ -1,0 +1,260 @@
+/* custom properties */
+:root {
+	--accent-color: #800000;
+	--gradient-color: #f6bb73;
+	--light_menu: white;
+	--mid_menu: antiquewhite;
+	--dark_menu: black;
+}
+
+/* reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* default styles */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: calc(15px + .2vw);
+	width: min(96%, 1024px);
+	line-height: 1.5;
+	margin: auto;
+	border: 2px solid var(--accent-color);
+}
+h1, h2, h3, p, ul {
+	padding: .25em 0;
+}
+a:hover, a:focus {
+	font-style: italic;
+	color: var(--accent-color);
+}
+h1 { font-size: 150%; }
+h2 {
+	font-size: 130%;
+	color: var(--accent-color);
+}
+h3 { font-size: 105%; }
+ul { margin-left: 2em; }
+
+/* responsive header and logo */
+header {
+	line-height: 1.2;
+	text-align: center;
+	border-bottom: 2px solid var(--accent-color);
+	background-image: linear-gradient(
+		30deg, var(--gradient-color) 0%, white 30%, white 65%, var(--gradient-color) 100%);
+	& h2 {
+		font-size: 145%;
+		padding: .5em 0 0;
+	}
+	& h3 {
+		font-size: 115%;
+		font-style: italic;
+		padding-bottom: 1em;
+	}
+	& img {
+		display: block;
+		width: clamp(42px, 14vw, 75px);
+		height: auto;
+		margin: .5em auto 0;
+		float: none;
+	}
+}
+
+/* mobile-first content layout */
+main {
+	display: flex;
+	flex-direction: column;
+	padding: 0 1em 1em;
+	& blockquote {
+		font-style: italic;
+		padding-left: 1em;
+	}
+	& h3 + img {
+		width: clamp(40px, 50%, 75px);
+		height: auto;
+		border: 4px double var(--accent-color);
+		border-radius: 10px;
+	}
+}
+section {
+	order: 1;
+	padding: 0 .25em 1em;
+	& img {
+		width: clamp(100px, 50%, 250px);
+		height: auto;
+		float: right;
+		margin: 0 1em .25em;
+	}
+}
+aside {
+	order: 2;
+	padding: .5em .25em 1em;
+	border-bottom: 2px solid var(--accent-color);
+}
+aside img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* footer */
+footer {
+	background-color: var(--accent-color);
+	& p {
+		text-align: center;
+		color: white;
+		padding: 1em 0;
+	}
+}
+
+/* content classes */
+.featured {
+	border-top: 2px solid var(--accent-color);
+	border-bottom: 2px solid var(--accent-color);
+	padding: .5em 0 1em;
+}
+.speaker {
+	& h1 { color: var(--accent-color); }
+	& h2 { color: black; }
+	& p { padding: .5em 0; }
+}
+.large { font-size: 125%; }
+
+/* Desktop navigation: SlickNav is the mobile menu */
+.navbar {
+	clear: left;
+	background-color: var(--accent-color);
+}
+.navbar ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.navbar a {
+	display: block;
+	padding: .7em .8em;
+	text-decoration: none;
+}
+.navbar a:link,
+.navbar a:visited {
+	color: var(--light_menu);
+}
+.navbar a:hover,
+.navbar a:focus,
+.navbar a.current {
+	background-color: var(--mid_menu);
+	color: var(--dark_menu);
+}
+
+/* Hide the full-size menu on narrow screens.
+   SlickNav creates and displays its own mobile menu. */
+#townhall-menu {
+	display: none;
+}
+.slicknav_menu {
+	display: block;
+	background: var(--accent-color);
+	font-size: 1em;
+	padding: .35em;
+}
+.slicknav_btn {
+	background-color: #650000;
+	margin: .35em .5em;
+}
+.slicknav_nav {
+	margin: 0;
+	padding: .25em 0;
+}
+.slicknav_nav a {
+	color: white;
+	padding: .55em .8em;
+	margin: 2px 5px;
+}
+.slicknav_nav a:hover,
+.slicknav_nav a:focus {
+	background: antiquewhite;
+	color: black;
+	border-radius: 0;
+}
+.slicknav_nav .slicknav_item a {
+	display: inline;
+	padding: 0;
+	margin: 0;
+}
+.slicknav_nav .slicknav_arrow {
+	color: white;
+}
+
+/* wider screens: restore the full horizontal menu and two-column layout */
+@media (min-width: 768px) {
+	body {
+		width: min(90%, 1024px);
+	}
+	header {
+		text-align: left;
+		& h2 { font-size: 175%; }
+		& h3 { font-size: 130%; }
+		& img {
+			display: block;
+			width: clamp(40px, 15%, 80px);
+			height: auto;
+			float: left;
+			margin: .75em 1em;
+		}
+	}
+	main {
+		flex-direction: row;
+	}
+	section {
+		order: 2;
+		flex: 3 1 75%;
+		padding-left: .5em;
+		border-bottom: 0;
+	}
+	aside {
+		order: 1;
+		flex: 1 1 25%;
+		padding-right: .5em;
+		border-bottom: 0;
+	}
+
+	/* Show full menu; hide SlickNav on desktop */
+	#townhall-menu {
+		display: flex !important;
+		flex-wrap: nowrap;
+	}
+	#townhall-menu > li {
+		flex: 1 1 20%;
+		text-align: center;
+		position: relative;
+	}
+	.slicknav_menu {
+		display: none !important;
+	}
+	.navbar a {
+		padding: 1em .5em;
+		margin: 0 1px 2px;
+	}
+	#townhall-menu > li:first-child a { margin-left: 0; }
+	#townhall-menu > li:last-child a { margin-right: 0; }
+
+	.submenu {
+		position: relative;
+	}
+	.dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background-color: var(--accent-color);
+		z-index: 10;
+		display: none;
+	}
+	.submenu:hover > .dropdown,
+	.submenu:focus-within > .dropdown {
+		display: block;
+	}
+}
